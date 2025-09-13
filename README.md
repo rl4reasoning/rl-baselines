@@ -18,13 +18,13 @@ pip install -r requirements.txt
 ```
 
 ## Datasets
-This repo was primarily created for the blog ["What to do when you have zero rewards during RL?"]((https://spiffy-airbus-472.notion.site/What-Can-You-Do-When-You-Have-Zero-Rewards-During-RL-260429bdb7308024b6bdd3ed4f64c15f))
+This repo was created for the blog post: ["What to do when you have zero rewards during RL?"]((https://spiffy-airbus-472.notion.site/What-Can-You-Do-When-You-Have-Zero-Rewards-During-RL-260429bdb7308024b6bdd3ed4f64c15f))
 
-We provide data generation scripts for star-graph that was used in the above blogpost, however, one could add their own tasks as well. Have a look for `tasks` directory for inspiration.
+We provide data generation scripts for star-graph that was used in the above blogpost. However, one could add their own tasks as well. Have a look for [`tasks`](./tasks/) directory for inspiration.
 
 ### Star-graph dataset generation
 #### Create star graph data for training
-Please follow the notebook `create_star_graph_data.ipynb` to generate a star-graph dataset and push to HF.
+Please follow the notebook [`create_star_graph_data.ipynb`](./create_star_graph_data.ipynb) to generate a star-graph dataset and push to HF.
 
 #### Mix Datasets
 To create dataset mixtures follow instructions in [`combine_datasets.ipynb`](./combine_datasets.ipynb).
@@ -40,7 +40,7 @@ python nano_r1_script.py \
 ```
 
 ### VinePPO 
-Monte carlo rollouts from top-3 high entropy tokens
+Chunk advantages are estimated using Monte carlo rollouts from top-3 high entropy tokens in the response
 ```bash
 python vineppo_and_reward_progress.py \
 --prover_policy_model_name Qwen/Qwen2.5-1.5B-Instruct \
@@ -55,7 +55,7 @@ python vineppo_and_reward_progress.py \
 ```
 
 ### Reward Progress 
-Use prover as `Qwen/Qwen2.5-1.5B-Instruct` and $A^{\mu}$ is estimated using roll outs from top-3 high entropy tokens
+Use prover as  `Best-of-4(Qwen/Qwen2.5-1.5B-Instruct)` and advantage under the prover is estimated using roll outs from top-3 high entropy tokens
 ```bash
 python nano_r1_script_prover.py \
 --prover_policy_model_name Qwen/Qwen2.5-1.5B-Instruct \
