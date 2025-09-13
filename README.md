@@ -1,6 +1,6 @@
-# zero-rewards-rl
+# RL Reasoning baselines
 
-Heavily inspired from: https://github.com/McGill-NLP/nano-aha-moment
+The code here is heavily inspired from the amazing repo: https://github.com/McGill-NLP/nano-aha-moment
 
 Each baseline is implemented in a seperate hackable file.
 
@@ -10,20 +10,26 @@ Baselines implemented:
 - Reward Progress
 - Best-of-N aware finetuning
 
-## installation
+## Installation
 
 ```bash
 # create new env using conda or uv or venv
 pip install -r requirements.txt
 ```
 
-## create star graph data for training
+## Datasets
+This repo was primarily created for the blog ["What to do when you have zero rewards during RL?"]((https://spiffy-airbus-472.notion.site/What-Can-You-Do-When-You-Have-Zero-Rewards-During-RL-260429bdb7308024b6bdd3ed4f64c15f))
+
+We provide data generation scripts for star-graph that was used in the above blogpost, however, one could add their own tasks as well. Have a look for `tasks` directory for inspiration.
+
+### Star-graph dataset generation
+#### Create star graph data for training
 Please follow the notebook `create_star_graph_data.ipynb` to generate a star-graph dataset and push to HF.
 
-## mix datasets
-If you want to create a mixture dataset, follow instructions in `combine_datasets.ipynb`.
+#### Mix Datasets
+To create dataset mixtures follow instructions in [`combine_datasets.ipynb`](./combine_datasets.ipynb).
 
-## sample commands to run baselines
+## Sample commands to run different baselines
 
 Dr. GRPO
 ```bash
@@ -48,6 +54,7 @@ python vineppo_and_reward_progress.py \
 ```
 
 Reward Progress (use prover as `Qwen/Qwen2.5-1.5B-Instruct` and $A^{\mu}$ is estimated using roll outs from top-3 high entropy tokens)
+Note that for the sake of simplicity, our implementation relies on Monte Carlo rollouts for computing $A^{\mu}$.
 ```bash
 python nano_r1_script_prover.py \
 --prover_policy_model_name Qwen/Qwen2.5-1.5B-Instruct \
@@ -70,4 +77,16 @@ python nano_r1_script_bon.py \
 --loss_type "best_of_n" \
 --num_generations 8 \
 --kl_schedule linear --initial_kl_coeff 0.1 --final_kl_coeff 0.001
+```
+
+## Citation
+In case you find this repo helpful, consider citing it as:
+```js
+@misc{jpab2025rlzero,
+title={What Can You Do When You Have Zero Rewards During RL?},
+author={Jatin Prakash and Anirudh Buvanesh},
+year={2025},
+howpublished={\url{https://spiffy-airbus-472.notion.site/What-Can-You-Do-When-You-Have-Zero-Rewards-During-RL-260429bdb7308024b6bdd3ed4f64c15f}},
+note={Notion Blog},
+}
 ```
