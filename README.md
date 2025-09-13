@@ -1,1 +1,73 @@
-# rl-baselines
+# zero-rewards-rl
+
+Heavily inspired from: https://github.com/McGill-NLP/nano-aha-moment
+
+Each baseline is implemented in a seperate hackable file.
+
+Baselines implemented:
+- Dr. GRPO
+- VinePPO
+- Reward Progress
+- Best-of-N aware finetuning
+
+## installation
+
+```bash
+# create new env using conda or uv or venv
+pip install -r requirements.txt
+```
+
+## create star graph data for training
+Please follow the notebook `create_star_graph_data.ipynb` to generate a star-graph dataset and push to HF.
+
+## mix datasets
+If you want to create a mixture dataset, follow instructions in `combine_datasets.ipynb`.
+
+## sample commands to run baselines
+
+Dr. GRPO
+```bash
+python nano_r1_script.py \
+--model_name Qwen/Qwen2.5-1.5B-Instruct \
+--task star-graph-deg-3-path-3-nodes-300 \
+--run_id Qwen2.5-1.5B-Instruct-Deg-3-Path-3
+```
+
+VinePPO (do monte carlo rollouts from top-3 high entropy tokens)
+```bash
+python vineppo_and_reward_progress.py \
+--prover_policy_model_name Qwen/Qwen2.5-1.5B-Instruct \
+--model_name Qwen/Qwen2.5-1.5B-Instruct \
+--run_id custom_run_id \
+--top_k_entropy_tokens 3  \
+--vineppo_k 3 \
+--prover_alpha 1.00 \
+--prover_policy_best_of_n 1 \
+--current_policy_as_prover 1 \
+--task hf_username/star-graph-deg-3-path-3-nodes-300
+```
+
+Reward Progress (use prover as `Qwen/Qwen2.5-1.5B-Instruct` and $A^{\mu}$ is estimated using roll outs from top-3 high entropy tokens)
+```bash
+python nano_r1_script_prover.py \
+--prover_policy_model_name Qwen/Qwen2.5-1.5B-Instruct \
+--model_name Qwen/Qwen2.5-1.5B-Instruct \
+--run_id custom_run_id \
+--top_k_entropy_tokens 3 \
+--vineppo_k 3 \
+--prover_alpha 0.83 \
+--prover_policy_best_of_n 4 \
+--current_policy_as_prover 0 \
+--task star-graph-deg-3-path-3-nodes-300
+```
+
+Best-of-N aware finetuning (Best-of-8 finetuning, using KL schedule from 0.1 to 0.001 in 1000 steps)
+```bash
+python nano_r1_script_bon.py \
+--model_name Qwen/Qwen2.5-1.5B-Instruct \
+--task star-graph-deg-10-path-10-nodes-300 \
+--run_id "10x10-bo8-kl-0.1-to-0.001-r2" \
+--loss_type "best_of_n" \
+--num_generations 8 \
+--kl_schedule linear --initial_kl_coeff 0.1 --final_kl_coeff 0.001
+```
