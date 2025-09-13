@@ -31,7 +31,7 @@ To create dataset mixtures follow instructions in [`combine_datasets.ipynb`](./c
 
 ## Sample commands to run different baselines
 
-Dr. GRPO
+### Dr. GRPO
 ```bash
 python nano_r1_script.py \
 --model_name Qwen/Qwen2.5-1.5B-Instruct \
@@ -39,7 +39,8 @@ python nano_r1_script.py \
 --run_id Qwen2.5-1.5B-Instruct-Deg-3-Path-3
 ```
 
-VinePPO (do monte carlo rollouts from top-3 high entropy tokens)
+### VinePPO 
+Monte carlo rollouts from top-3 high entropy tokens
 ```bash
 python vineppo_and_reward_progress.py \
 --prover_policy_model_name Qwen/Qwen2.5-1.5B-Instruct \
@@ -53,8 +54,8 @@ python vineppo_and_reward_progress.py \
 --task hf_username/star-graph-deg-3-path-3-nodes-300
 ```
 
-Reward Progress (use prover as `Qwen/Qwen2.5-1.5B-Instruct` and $A^{\mu}$ is estimated using roll outs from top-3 high entropy tokens)
-Note that for the sake of simplicity, our implementation relies on Monte Carlo rollouts for computing $A^{\mu}$.
+### Reward Progress 
+Use prover as `Qwen/Qwen2.5-1.5B-Instruct` and $A^{\mu}$ is estimated using roll outs from top-3 high entropy tokens
 ```bash
 python nano_r1_script_prover.py \
 --prover_policy_model_name Qwen/Qwen2.5-1.5B-Instruct \
@@ -68,7 +69,8 @@ python nano_r1_script_prover.py \
 --task star-graph-deg-3-path-3-nodes-300
 ```
 
-Best-of-N aware finetuning (Best-of-8 finetuning, using KL schedule from 0.1 to 0.001 in 1000 steps)
+### Best-of-N aware finetuning 
+Best-of-8 finetuning, using KL schedule from 0.1 to 0.001 in 1000 steps
 ```bash
 python nano_r1_script_bon.py \
 --model_name Qwen/Qwen2.5-1.5B-Instruct \
