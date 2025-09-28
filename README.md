@@ -33,7 +33,7 @@ To create dataset mixtures follow instructions in [`combine_datasets.ipynb`](./c
 
 ### Dr. GRPO
 ```bash
-python nano_r1_script.py \
+python grpo.py \
 --model_name Qwen/Qwen2.5-1.5B-Instruct \
 --task star-graph-deg-3-path-3-nodes-300 \
 --run_id Qwen2.5-1.5B-Instruct-Deg-3-Path-3
@@ -57,7 +57,7 @@ python vineppo_and_reward_progress.py \
 ### Reward Progress 
 Use prover as  `Best-of-4(Qwen/Qwen2.5-1.5B-Instruct)` and advantage under the prover is estimated using roll outs from top-3 high entropy tokens
 ```bash
-python nano_r1_script_prover.py \
+python vineppo_and_reward_progress.py \
 --prover_policy_model_name Qwen/Qwen2.5-1.5B-Instruct \
 --model_name Qwen/Qwen2.5-1.5B-Instruct \
 --run_id custom_run_id \
@@ -72,7 +72,7 @@ python nano_r1_script_prover.py \
 ### Best-of-N aware finetuning 
 Best-of-8 finetuning, using KL schedule from 0.1 to 0.001 in 1000 steps
 ```bash
-python nano_r1_script_bon.py \
+python best_of_n_aware_finetune.py \
 --model_name Qwen/Qwen2.5-1.5B-Instruct \
 --task star-graph-deg-10-path-10-nodes-300 \
 --run_id "10x10-bo8-kl-0.1-to-0.001-r2" \
