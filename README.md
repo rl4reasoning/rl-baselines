@@ -10,6 +10,8 @@ Baselines implemented:
 - Reward Progress
 - Best-of-N aware finetuning
 
+For a quick summary of our results refer to our Notion Blog Post: ["What to do when you have zero rewards during RL?"]((https://spiffy-airbus-472.notion.site/What-Can-You-Do-When-You-Have-Zero-Rewards-During-RL-260429bdb7308024b6bdd3ed4f64c15f))
+
 ## Installation
 
 ```bash
@@ -18,8 +20,6 @@ pip install -r requirements.txt
 ```
 
 ## Datasets
-This repo was created for the blog post: ["What to do when you have zero rewards during RL?"]((https://spiffy-airbus-472.notion.site/What-Can-You-Do-When-You-Have-Zero-Rewards-During-RL-260429bdb7308024b6bdd3ed4f64c15f))
-
 We provide data generation scripts for star-graph that was used in the above blogpost. However, one could add their own tasks as well. Have a look for [`tasks`](./tasks/) directory for inspiration.
 
 ### Star-graph dataset generation
@@ -84,11 +84,11 @@ python best_of_n_aware_finetune.py \
 ## Citation
 In case you find this repo helpful, consider citing it as:
 ```js
-@misc{jpab2025rlzero,
-title={What Can You Do When You Have Zero Rewards During RL?},
-author={Jatin Prakash and Anirudh Buvanesh},
-year={2025},
-howpublished={\url{https://spiffy-airbus-472.notion.site/What-Can-You-Do-When-You-Have-Zero-Rewards-During-RL-260429bdb7308024b6bdd3ed4f64c15f}},
-note={Notion Blog},
+
+@article{jpab2025rlzero,
+  title={What Can You Do When You Have Zero Rewards During RL?},
+  author={Prakash, Jatin* and Buvanesh, Anirudh*},
+  journal={arXiv preprint arXiv:2510.03971},
+  year={2025}
 }
 ```
