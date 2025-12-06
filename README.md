@@ -87,7 +87,7 @@ In case you find this repo helpful, consider citing it as:
 
 @article{jpab2025rlzero,
   title={What Can You Do When You Have Zero Rewards During RL?},
-  author={Prakash, Jatin* and Buvanesh, Anirudh*},
+  author={Prakash, Jatin and Buvanesh, Anirudh},
   journal={arXiv preprint arXiv:2510.03971},
   year={2025}
 }
