@@ -17,6 +17,11 @@ def get_dataset(task: str):
         from .graph import get_dataset
 
         return get_dataset(task)
+    
+    elif task.__contains__("gsm_infinity"):
+        from .gsm_infinity import get_dataset
+
+        return get_dataset(task)
     else:
         raise ValueError(f"Task {task} not found in get_dataset")
 
@@ -41,6 +46,11 @@ def preprocess_example(
 
         return preprocess_example(example, tokenizer, model_name)
 
+    elif task.__contains__("gsm_infinity"):
+        from .gsm_infinity import preprocess_example
+
+        return preprocess_example(example, tokenizer, model_name)
+
     else:
         raise ValueError(f"Task {task} not found in preprocess_example")
 
@@ -58,6 +68,10 @@ def get_reward_fn(task: str):
         from .graph import compute_reward
 
         return compute_reward
+    elif task.__contains__("gsm_infinity"):
+        from .gsm_infinity import compute_reward
+
+        return compute_reward
     else:
         raise ValueError(f"Task {task} not found in get_reward_fn")
 
@@ -65,6 +79,10 @@ def get_reward_fn(task: str):
 def get_extract_answer_fn(task: str):
     if task.__contains__("graph"):
         from .graph import extract_answer
+
+        return extract_answer
+    elif task.__contains__("gsm_infinity"):
+        from .gsm_infinity import extract_answer
 
         return extract_answer
     else:
